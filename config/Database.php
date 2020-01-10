@@ -1,10 +1,10 @@
 <?php
   class Database {
     // DB Params
-    private $host = 'mysqlsvr70.world4you.com';
-    private $db_name = '5166141db1';
-    private $username = 'sql7063470';
-    private $password = '9q+4zcu';
+    private $host = 'insert host url';
+    private $db_name = 'insert database name';
+    private $username = 'insert user name';
+    private $password = 'insert password';
     private $conn;
 
     // DB Connect
