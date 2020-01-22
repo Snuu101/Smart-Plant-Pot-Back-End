@@ -1,1 +1,1 @@
-# Smart-Plant-Pot-Backend
+# Smart-Plant-Pot-Back-End
