@@ -28,23 +28,13 @@
     public function read() {
       // Create query
       $query = '
-      SELECT u.user_name as user_name,
-        p.id,
-        p.name,
-        p.date_added,
-        p.owner_id,
-        p.status,
-        p.temperature_treshold,
-        p.humidity_treshold,
-        p.active,
-        p.profile_image_id,
-        p.type
-      FROM
-        ' . $this->table . ' p
-      LEFT JOIN
-        users u ON p.owner_id = u.id
-      ORDER BY
-        p.date_added DESC';
+      SELECT p.*,
+        (SELECT value from measurements WHERE (p.id = plant_id) AND (type = \'temperature\') ORDER BY date DESC LIMIT 1) AS \'curr_temperature\',
+        (SELECT value from measurements WHERE (p.id = plant_id) AND (type = \'humidity_air\') ORDER BY date DESC LIMIT 1) AS \'curr_humidity_air\',
+        (SELECT value from measurements WHERE (p.id = plant_id) AND (type = \'humidity_soil\') ORDER BY date DESC LIMIT 1) AS \'curr_humidity_soil\',
+        (SELECT path from images WHERE (p.id = plant_id) ORDER BY date DESC LIMIT 1) AS \'profile_image_id\'
+      FROM plants p
+      ';
 
       // Prepare statement
       $stmt = $this->conn->prepare($query);
@@ -285,18 +275,21 @@
     // Update Plant
     public function update() {
           // Create query
-          $query = 'UPDATE ' . $this->table . '
-            SET
-                name = :name,
-                owner_id = :owner_id,
-                status = :status,
-                temperature_treshold = :temperature_treshold,
-                humidity_treshold = :humidity_treshold,
-                active = :active,
-                profile_image_id = :profile_image_id,
-                type = :type
-            WHERE
-                id = :id';
+          $query = '
+          UPDATE
+            ' . $this->table . '
+          SET
+            name = :name,
+            owner_id = :owner_id,
+            status = :status,
+            temperature_treshold = :temperature_treshold,
+            humidity_treshold = :humidity_treshold,
+            active = :active,
+            profile_image_id = :profile_image_id,
+            type = :type
+          WHERE
+            id = :id
+          ';
 
           // Prepare statement
           $stmt = $this->conn->prepare($query);
@@ -320,6 +313,58 @@
           $stmt->bindParam(':humidity_treshold', $this->humidity_treshold);
           $stmt->bindParam(':active', $this->active);
           $stmt->bindParam(':profile_image_id', $this->profile_image_id);
+          $stmt->bindParam(':type', $this->type);
+          $stmt->bindParam(':id', $this->id);
+
+          // Execute query
+          if($stmt->execute()) {
+            return true;
+      }
+
+      // Print error if something goes wrong
+      printf("Error: %s.\n", $stmt->error);
+
+      return false;
+    }
+
+    // Update Plant From App
+    public function updateFromApp() {
+          // Create query
+          $query = '
+          UPDATE
+            ' . $this->table . '
+          SET
+            name = :name,
+            owner_id = :owner_id,
+            status = :status,
+            temperature_treshold = :temperature_treshold,
+            humidity_treshold = :humidity_treshold,
+            active = :active,
+            type = :type
+          WHERE
+            id = :id
+          ';
+
+          // Prepare statement
+          $stmt = $this->conn->prepare($query);
+
+          // Clean data
+          $this->name = htmlspecialchars(strip_tags($this->name));
+          $this->owner_id = htmlspecialchars(strip_tags($this->owner_id));
+          $this->status = htmlspecialchars(strip_tags($this->status));
+          $this->temperature_treshold = htmlspecialchars(strip_tags($this->temperature_treshold));
+          $this->humidity_treshold = htmlspecialchars(strip_tags($this->humidity_treshold));
+          $this->active = htmlspecialchars(strip_tags($this->active));
+          $this->type = htmlspecialchars(strip_tags($this->type));
+          $this->id = htmlspecialchars(strip_tags($this->id));
+
+          // Bind data
+          $stmt->bindParam(':name', $this->name);
+          $stmt->bindParam(':owner_id', $this->owner_id);
+          $stmt->bindParam(':status', $this->status);
+          $stmt->bindParam(':temperature_treshold', $this->temperature_treshold);
+          $stmt->bindParam(':humidity_treshold', $this->humidity_treshold);
+          $stmt->bindParam(':active', $this->active);
           $stmt->bindParam(':type', $this->type);
           $stmt->bindParam(':id', $this->id);
 
@@ -469,5 +514,4 @@
       return $this->type;
     }
 
-
-  }
+}
