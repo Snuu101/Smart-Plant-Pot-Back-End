@@ -18,5 +18,5 @@ The database model shows the relation between the tables, items and the data typ
 ![Database model](/Readme_Images/DatabaseModelpng.png)
 
 # REST API Documentation
-The REST API documantation provides information about alle accepted querys by the mySQL Database and also about schema of the contents of the database respond.
+The REST API documantation provides information about alle accepted querys by the MySQL Database and also about schema of the contents of the database respond.
 The documentation can be found [here](https://app.swaggerhub.com/apis-docs/Smart-Plant-Pot/SmartPlantPot/1.0.0)
