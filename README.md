@@ -8,11 +8,11 @@ The following steps must be completed in order to run the REST API:
 
 - Setup a mySQL Database on your server
 - The mySQL Database can be created using the provided *Create_Smart-Plant-Pot_DB.sql* file
-- Put *api*, *config* and *model* Folders on your Server
+- Put the *api*, *config* and *model* folders on your Server
 - Configure the API in the config folder (see Read.me inside)
 
 # Database Model
-The database model shows the relation between the tables, items and the datatypes.
+The database model shows the relation between the tables, items and the data types.
 
 ![Database model](/Readme_Images/DatabaseModelpng.png)
 
