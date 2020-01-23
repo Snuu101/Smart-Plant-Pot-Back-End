@@ -38,7 +38,10 @@
         'humidity_treshold' => $humidity_treshold,
         'active' => $active,
         'profile_image_id' => $profile_image_id,
-        'type' => $type
+        'type' => $type,
+        'curr_temperature' => $curr_temperature,
+        'curr_humidity_air' => $curr_humidity_air,
+        'curr_humidity_soil' => $curr_humidity_soil
       );
 
       // Push to "data"
