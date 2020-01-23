@@ -6,8 +6,8 @@ The REST API provides the infrastructure for the comunication between Raspberry 
 # How to
 The following steps must be completed in order to run the REST API:
 
-- Setup a mySQL Database on your server
-- The mySQL Database can be created using the provided *Create_Smart-Plant-Pot_DB.sql* file
+- Setup a MySQL Database on your server
+- The MySQL Database can be created using the provided *Create_Smart-Plant-Pot_DB.sql* file
 - Put the *api*, *config* and *model* folders on your Server
 - Additionally create a folder named *images* this is needed to store pictures from the webcam
 - Configure the API: Edit *Database.php* in the *config* folder (see README.md inside for more information)
