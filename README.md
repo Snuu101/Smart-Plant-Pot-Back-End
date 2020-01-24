@@ -1,7 +1,13 @@
 # Smart Plant Pot - Back End
-The Smart Pant Pot - Back End is part of the Smart Plant Pot project, klick [here](https://github.com/Snuu101/Smart-Plant-Pot) for more information about the whole project.
-The Smart Plant Pot Back End consists of a SQL Database and a REST API.
-The REST API provides the infrastructure for the comunication between Raspberry PI and iOS-App with the MySQL database.
+
+<p align="center">
+<img width="450" alt="back end technologies" src="/Readme_Images/backend.JPG")
+</p>
+
+The Smart Pant Pot back end is part of the Smart Plant Pot project, click [here](https://github.com/Snuu101/Smart-Plant-Pot) for more information about the whole project.
+
+The Smart Plant Pot back end consists of a SQL Database and a REST API.
+The REST API provides the infrastructure for the communication between Raspberry PI and iOS app with the MySQL database. The API is written in PHP and uses simple HTTP-requests (GET, POST, PUT) for the communication. The payload of the HTTP-requests is alwas a JSON file.
 
 # How to
 The following steps must be completed in order to run the REST API:
@@ -18,5 +24,5 @@ The database model shows the relation between the tables, items and the data typ
 ![Database model](/Readme_Images/DatabaseModelpng.png)
 
 # REST API Documentation
-The REST API documantation provides information about alle accepted querys by the MySQL Database and also about schema of the contents of the database respond.
-The documentation can be found [here](https://app.swaggerhub.com/apis-docs/Smart-Plant-Pot/SmartPlantPot/1.0.0)
+The REST API documentation provides information about alle accepted queries by the MySQL database and also about the schema of the contents of the database respond.
+The documentation can be found on [swagger.io](https://app.swaggerhub.com/apis-docs/Smart-Plant-Pot/SmartPlantPot/1.0.0)
